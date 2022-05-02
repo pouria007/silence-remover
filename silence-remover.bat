@@ -8,7 +8,6 @@ if defined filename (goto cutoff) else (goto error1)
 if defined cutDB (goto predifined) else (goto autodefine)
 
 :autodefine
-SET /A a = 5 
 SETLOCAL
 call :finddb meanDB
 echo The meanDB is %meanDB%
@@ -32,8 +31,6 @@ echo Please enter the file name. Example: silence-remover.bat input.mp3
 goto :EOF
 
 :finddb
-
-
 for /F "tokens=5" %%f in ('ffmpeg.exe -i %filename% -af "volumedetect" -vn -sn -dn -f null /dev/null 2^>^&1 ^| findstr /i /r /c:"mean.*dB"') DO (
   set count=%%f
 )
